@@ -1,26 +1,23 @@
+import { ApiResponse } from "@/common/api/types";
 import { Separator } from "@/components/ui/separator";
 import Typography from "@/components/ui/typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
-// interface CardProps {
-//   item?: ApiResponse;
-// }
-export default function Card() {
+interface CardProps {
+  item: ApiResponse;
+}
+export default function Card({ item }: CardProps) {
   return (
-    <div className="flex flex-col shadow rounded-md px-4 py-5 w-full max-w-[442px] gap-5">
+    <div className="flex flex-col shadow rounded-md px-4 py-5 w-full max-w-[442px] h-full gap-5">
       <div className="flex gap-2.5 w-full">
-        <img
-          src="/src/assets/engi.svg"
-          alt="logo"
-          className="object-contain w-20"
-        />
+        <img src={item.logo} alt="logo" className="object-contain w-20" />
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col w-full">
             <div className="flex justify-between w-full items-center">
               <Typography className="text-grapefruit text-2xl">
-                คณะวิศวกรรมศาสตร์
+                {item.faculty.name}
               </Typography>
               <FavoriteIcon className="w-1.5 h-1.5 text-grapefruit" />
             </div>
@@ -29,7 +26,7 @@ export default function Card() {
               fontWeight="medium"
               className="text-warm-grey text-xl"
             >
-              สาขาวิศวกรรมทั่วไป
+              {item.name}
             </Typography>
           </div>
           <Typography
@@ -37,7 +34,7 @@ export default function Card() {
             fontWeight="light"
             className="text-warm-grey text-xl"
           >
-            จุฬาลงกรณ์มหาวิทยาลัย
+            {item.faculty.university.name}
           </Typography>
         </div>
       </div>
@@ -52,16 +49,13 @@ export default function Card() {
             รอบที่เปิด
           </Typography>
           <div className="flex gap-2 items-center">
-            <div className="w-8 h-8 bg-greenish-teal rounded-full flex items-center justify-center">
-              <Typography variant="body1" className="text-white">
-                1
-              </Typography>
-            </div>
-            <div className="w-8 h-8 bg-grey rounded-full flex items-center justify-center">
-              <Typography variant="body1" className="text-white">
-                2
-              </Typography>
-            </div>
+            {item.roundSeats.map((roundSeat) => (
+              <div className="w-8 h-8 bg-greenish-teal rounded-full flex items-center justify-center">
+                <Typography variant="body1" className="text-white">
+                  {roundSeat}
+                </Typography>
+              </div>
+            ))}
           </div>
         </div>
         <div className="flex justify-between items-center">
@@ -97,38 +91,40 @@ export default function Card() {
               fontWeight="light"
               className="text-grey-three text-4xl"
             >
-              22222
+              {22222}
             </Typography>
           </div>
         </div>
-        <div className="flex h-5 items-center space-x-4 justify-center my-4 w-full">
-          <div className="flex flex-col items-center w-full">
-            <Typography variant="body1" className="text-grey-two text-xl">
-              20,845
-            </Typography>
-            <Typography variant="body1" className="text-grey-two text-xs">
-              คะแนนต่ำสุด 60
-            </Typography>
+        {item.score && (
+          <div className="flex h-5 items-center space-x-4 justify-center my-4 w-full">
+            <div className="flex flex-col items-center w-full">
+              <Typography variant="body1" className="text-grey-two text-xl">
+                {item.score.min}
+              </Typography>
+              <Typography variant="body1" className="text-grey-two text-xs">
+                คะแนนต่ำสุด 60
+              </Typography>
+            </div>
+            <Separator orientation="vertical" />
+            <div className="flex flex-col items-center w-full">
+              <Typography variant="body1" className="text-grey-two text-xl">
+                {item.score.avg}
+              </Typography>
+              <Typography variant="body1" className="text-grey-two text-xs">
+                คะแนนเฉลี่ย 60
+              </Typography>
+            </div>
+            <Separator orientation="vertical" />
+            <div className="flex flex-col items-center w-full">
+              <Typography variant="body1" className="text-grey-two text-xl">
+                {item.score.max}
+              </Typography>
+              <Typography variant="body1" className="text-grey-two text-xs">
+                คะแนนสูงสุด 60
+              </Typography>
+            </div>
           </div>
-          <Separator orientation="vertical" />
-          <div className="flex flex-col items-center w-full">
-            <Typography variant="body1" className="text-grey-two text-xl">
-              20,845
-            </Typography>
-            <Typography variant="body1" className="text-grey-two text-xs">
-              คะแนนเฉลี่ย 60
-            </Typography>
-          </div>
-          <Separator orientation="vertical" />
-          <div className="flex flex-col items-center w-full">
-            <Typography variant="body1" className="text-grey-two text-xl">
-              20,845
-            </Typography>
-            <Typography variant="body1" className="text-grey-two text-xs">
-              คะแนนสูงสุด 60
-            </Typography>
-          </div>
-        </div>
+        )}
         <Separator />
         <div className="flex gap-5 items-center">
           <PlayArrowIcon className="text-[#48b6a3]" />
@@ -141,7 +137,7 @@ export default function Card() {
           <div className="flex gap-2 items-center">
             <PersonIcon className="text-warm-grey" />
             <Typography variant="body1" className="text-warm-grey text-xs">
-              10 คนที่สนใจ
+              {item.likes} คนที่สนใจ
             </Typography>
           </div>
           <img src="/src/assets/share.svg" alt="medal" className="h-6" />
