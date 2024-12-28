@@ -30,6 +30,7 @@ module.exports = {
         "grey-three": "hsl(var(--grey-three))",
         "greenish-teal": "hsl(var(--greenish-teal))",
         "warm-grey": "hsl(var(--warm-grey))",
+        "green-neon": "hsl(var(--green-neon))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

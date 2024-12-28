@@ -8,6 +8,11 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 interface CardProps {
   item: ApiResponse;
 }
+
+const TcasMapping: { [key: string]: string } = {
+  ADMISSION: "Admission",
+};
+
 export default function Card({ item }: CardProps) {
   return (
     <div className="flex flex-col shadow rounded-md px-4 py-5 w-full max-w-[442px] h-full gap-5">
@@ -73,9 +78,9 @@ export default function Card({ item }: CardProps) {
             variant="body1"
             className="text-grapefruit text-base font-semibold"
           >
-            รอบที่ 4 : Admission
+            รอบที่ 4 : {item.score ? TcasMapping[item.score.scoreType] : "-"}
           </Typography>
-          <button className="px-5 py-2 text-xs border flex gap-2 rounded-2xl bg-transparent border-grapefruit text-grapefruit">
+          <button className="hover:bg-grapefruit/10 px-5 py-2 text-xs border flex gap-2 rounded-2xl bg-transparent border-grapefruit text-grapefruit">
             แก้ไขคะแนน
             <img src="/src/assets/cal.svg" alt="cal" className="h-4" />
           </button>
@@ -109,7 +114,7 @@ export default function Card({ item }: CardProps) {
           <div className="flex h-5 items-center space-x-4 justify-center my-4 w-full">
             <div className="flex flex-col items-center w-full">
               <Typography variant="body1" className="text-grey-two text-xl">
-                {item.score.min}
+                {item.score.min === 0 ? "-" : item.score.min}
               </Typography>
               <Typography variant="body1" className="text-grey-two text-xs">
                 คะแนนต่ำสุด {item.score.year.toString().slice(-2)}
@@ -118,7 +123,7 @@ export default function Card({ item }: CardProps) {
             <Separator orientation="vertical" />
             <div className="flex flex-col items-center w-full">
               <Typography variant="body1" className="text-grey-two text-xl">
-                {item.score.avg}
+                {item.score.avg === 0 ? "-" : item.score.min}
               </Typography>
               <Typography variant="body1" className="text-grey-two text-xs">
                 คะแนนเฉลี่ย {item.score.year.toString().slice(-2)}
@@ -127,7 +132,7 @@ export default function Card({ item }: CardProps) {
             <Separator orientation="vertical" />
             <div className="flex flex-col items-center w-full">
               <Typography variant="body1" className="text-grey-two text-xl">
-                {item.score.max}
+                {item.score.max === 0 ? "-" : item.score.min}
               </Typography>
               <Typography variant="body1" className="text-grey-two text-xs">
                 คะแนนสูงสุด {item.score.year.toString().slice(-2)}
@@ -137,8 +142,8 @@ export default function Card({ item }: CardProps) {
         )}
         <Separator />
         <div className="flex gap-5 items-center">
-          <PlayArrowIcon className="text-[#48b6a3]" />
-          <Typography variant="body1" className="text-[#48b6a3] text-base">
+          <PlayArrowIcon className="text-green-neon" />
+          <Typography variant="body1" className="text-green-neon text-base">
             ดูสัดส่วนคะแนน
           </Typography>
         </div>
@@ -147,7 +152,7 @@ export default function Card({ item }: CardProps) {
           <div className="flex gap-2 items-center">
             <PersonIcon className="text-warm-grey" />
             <Typography variant="body1" className="text-warm-grey text-xs">
-              {item.likes} คนที่สนใจ
+              {item.likes} <span className="italic">คนที่สนใจ</span>
             </Typography>
           </div>
           <img
