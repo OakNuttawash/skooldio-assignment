@@ -2,11 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -16,7 +16,20 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+      },
+      fontSize: {
+        h1: ["var(--font-size-h1)", "var(--line-height-h1)"],
+        body1: ["var(--font-size-body1)", "var(--line-height-body1)"],
+      },
       colors: {
+        grapefruit: "hsl(var(--grapefruit))",
+        grey: "hsl(var(--grey))",
+        "grey-two": "hsl(var(--grey-two))",
+        "grey-three": "hsl(var(--grey-three))",
+        "greenish-teal": "hsl(var(--greenish-teal))",
+        "warm-grey": "hsl(var(--warm-grey))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -70,7 +83,10 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      boxShadow: {
+        DEFAULT: "var(--shadow-default)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
