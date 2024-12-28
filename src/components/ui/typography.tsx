@@ -13,6 +13,7 @@ const typographyVariant = cva("", {
       light: "font-light",
       medium: "font-medium",
       bold: "font-bold",
+      semibold: "font-semibold",
     },
   },
   defaultVariants: {

@@ -21,7 +21,10 @@ export default function Card({ item }: CardProps) {
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col w-full">
             <div className="flex justify-between w-full items-center">
-              <Typography className="text-grapefruit text-2xl">
+              <Typography
+                className="text-grapefruit text-2xl"
+                fontWeight="semibold"
+              >
                 {item.faculty.name}
               </Typography>
               <FavoriteIcon className="w-1.5 h-1.5 text-grapefruit" />
@@ -93,7 +96,7 @@ export default function Card({ item }: CardProps) {
               className="w-7 h-9 ml-6"
             />
           </div>
-          <div className="flex flex-col items-end w-1/3">
+          <div className="flex flex-col items-end">
             <Typography
               variant="body1"
               fontWeight="light"
