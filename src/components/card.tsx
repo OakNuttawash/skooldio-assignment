@@ -49,12 +49,22 @@ export default function Card({ item }: CardProps) {
             รอบที่เปิด
           </Typography>
           <div className="flex gap-2 items-center">
-            {item.roundSeats.map((roundSeat) => (
-              <div className="w-8 h-8 bg-greenish-teal rounded-full flex items-center justify-center">
-                <Typography variant="body1" className="text-white">
-                  {roundSeat}
-                </Typography>
-              </div>
+            {item.roundSeats.map((roundSeat, index) => (
+              <>
+                {roundSeat === -1 ? (
+                  <div className="w-8 h-8 bg-grey rounded-full flex items-center justify-center">
+                    <Typography variant="body1" className="text-white">
+                      {index + 1}
+                    </Typography>
+                  </div>
+                ) : (
+                  <div className="w-8 h-8 bg-greenish-teal rounded-full flex items-center justify-center">
+                    <Typography variant="body1" className="text-white">
+                      {index + 1}
+                    </Typography>
+                  </div>
+                )}
+              </>
             ))}
           </div>
         </div>
@@ -102,7 +112,7 @@ export default function Card({ item }: CardProps) {
                 {item.score.min}
               </Typography>
               <Typography variant="body1" className="text-grey-two text-xs">
-                คะแนนต่ำสุด 60
+                คะแนนต่ำสุด {item.score.year.toString().slice(-2)}
               </Typography>
             </div>
             <Separator orientation="vertical" />
@@ -111,7 +121,7 @@ export default function Card({ item }: CardProps) {
                 {item.score.avg}
               </Typography>
               <Typography variant="body1" className="text-grey-two text-xs">
-                คะแนนเฉลี่ย 60
+                คะแนนเฉลี่ย {item.score.year.toString().slice(-2)}
               </Typography>
             </div>
             <Separator orientation="vertical" />
@@ -120,7 +130,7 @@ export default function Card({ item }: CardProps) {
                 {item.score.max}
               </Typography>
               <Typography variant="body1" className="text-grey-two text-xs">
-                คะแนนสูงสุด 60
+                คะแนนสูงสุด {item.score.year.toString().slice(-2)}
               </Typography>
             </div>
           </div>
@@ -140,7 +150,11 @@ export default function Card({ item }: CardProps) {
               {item.likes} คนที่สนใจ
             </Typography>
           </div>
-          <img src="/src/assets/share.svg" alt="medal" className="h-6" />
+          <img
+            src="/src/assets/share.svg"
+            alt="medal"
+            className="h-6 cursor-pointer"
+          />
         </div>
       </div>
     </div>
